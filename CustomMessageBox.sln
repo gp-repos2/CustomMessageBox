@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomMessageBox", "CustomMessageBox\CustomMessageBox.csproj", "{B188A6BD-6E07-4B06-AAB6-7A6F5093304E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomMessageBox.Demo", "CustomMessageBoxDemo\CustomMessageBox.Demo.csproj", "{455173EA-2FF0-498A-8536-BA588B8E44F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomMessageBox.Demo", "CustomMessageBox.Demo\CustomMessageBox.Demo.csproj", "{455173EA-2FF0-498A-8536-BA588B8E44F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
