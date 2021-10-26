@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace CustomDialogs
 {
     public partial class InputTextBox : Form
     {
-        string title;
-        string caption;
-        CustomMessageBoxButton[] buttons;
-        int defaultButtonNo;
+        private readonly string title;
+        private readonly string caption;
+        private readonly CustomMessageBoxButton[] buttons;
+        private readonly int defaultButtonNo;
 
         public string TextValue
         {
@@ -34,19 +33,18 @@ namespace CustomDialogs
             this.caption = caption;
             this.buttons = buttons;
             this.defaultButtonNo = defaultButtonNo;
+            if (this.buttons == null || this.buttons.Length == 0)
+            {
+                this.buttons = new CustomMessageBoxButton[] { new CustomMessageBoxButton(CustomButtonResult.OK), new CustomMessageBoxButton(CustomButtonResult.Cancel) };
+                this.defaultButtonNo = 1;
+            }
         }
 
         private void InputTextBox_Load(object sender, EventArgs e)
         {
-            this.Text = caption;
+            Text = caption;
             lblTitle.Text = title;
             tbText.Text = TextValue;
-
-            if (buttons == null || buttons.Length == 0)
-            {
-                buttons = new CustomMessageBoxButton[] { new CustomMessageBoxButton(CustomButtonResult.OK), new CustomMessageBoxButton(CustomButtonResult.Cancel) };
-                defaultButtonNo = 1;
-            }
 
             for (int i = 0; i < buttons.Length; i++)
                 AddMessageBoxButton(buttons[i], i > 0, i == defaultButtonNo - 1);
@@ -55,10 +53,14 @@ namespace CustomDialogs
             if (cbVerification.Visible)
                 cbVerification.Text = VerificationText;
 
-            int customWidth = 80 * bottomPanel.Controls.Cast<Control>().Count(w => w is Button) - 6 + 20 + (cbVerification.Visible ? cbVerification.Width + 10 : 0);
+            int customWidth = -6 + 20 + (cbVerification.Visible ? cbVerification.Width + 10 : 0);
 
-            if (this.ClientSize.Width < customWidth)
-                this.Width = customWidth + this.Width - this.ClientSize.Width;
+            foreach (var control in bottomPanel.Controls)
+                if (control is Button)
+                    customWidth += 80;
+
+            if (ClientSize.Width < customWidth)
+                Width = customWidth + Width - ClientSize.Width;
 
             CustomResult = CustomButtonResult.None;
         }
